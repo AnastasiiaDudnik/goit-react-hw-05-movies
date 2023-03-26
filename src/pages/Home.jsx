@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 const Home = () => {
   const [movieList, setMovieList] = useState([]);
+  const location = useLocation();
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -31,7 +32,9 @@ const Home = () => {
       <ul>
         {movieList.map(({ title, id }) => (
           <li key={id}>
-            <Link to={`movies/${id}`}>{title}</Link>
+            <Link to={`movies/${id}`} state={{ from: location }}>
+              {title}
+            </Link>
           </li>
         ))}
       </ul>

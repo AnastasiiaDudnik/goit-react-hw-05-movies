@@ -1,9 +1,11 @@
-import { Outlet, useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
+  const location = useLocation();
+  const goBackRef = useRef(location.state?.from ?? '/movies');
   const [movie, setMovie] = useState('');
   const [error, setError] = useState(null);
 
@@ -40,6 +42,7 @@ const MovieDetails = () => {
   return (
     <>
       {error && <h1>{error.message}</h1>}
+      <Link to={goBackRef}>Go back</Link>
       {movie && (
         <div>
           <h1>
