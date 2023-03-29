@@ -1,6 +1,7 @@
 import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { getMovie } from 'services/movieAPI';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -62,7 +63,7 @@ const MovieDetails = () => {
         </ul>
       </div>
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </>
