@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, Suspense } from 'react';
 import { getMovie } from 'services/movieAPI';
 import { Loader } from 'components/Loader/Loader';
 import { GoBack } from 'components/GoBack/GoBack';
+import { Wrapper } from './MovieDetails.styed';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -31,27 +32,29 @@ const MovieDetails = () => {
     <>
       {error && <h1>{error.message}</h1>}
       <GoBack to={goBackRef}>Go back</GoBack>
-      {movie && (
-        <div>
-          <h1>
-            {title} ({release_date.slice(0, 4)})
-          </h1>
-          <p>User Score: {userScore}%</p>
-          <h2>Overview</h2>
-          <p>{overview}</p>
-          <h3>Genres</h3>
-          {genres.map(({ name, id }) => (
-            <p key={id}>{name}</p>
-          ))}
-        </div>
-      )}
+      <Wrapper>
+        {movie && (
+          <div>
+            <h1>
+              {title} ({release_date.slice(0, 4)})
+            </h1>
+            <p>User Score: {userScore}%</p>
+            <h2>Overview</h2>
+            <p>{overview}</p>
+            <h3>Genres</h3>
+            {genres.map(({ name, id }) => (
+              <p key={id}>{name}</p>
+            ))}
+          </div>
+        )}
 
-      <div>
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-          alt={title}
-        />
-      </div>
+        <div>
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+            alt={title}
+          />
+        </div>
+      </Wrapper>
       <div>
         <p>Additional information</p>
         <ul>
