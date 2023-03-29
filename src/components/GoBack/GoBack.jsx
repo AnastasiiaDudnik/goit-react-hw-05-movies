@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { BackLink } from './GoBack.styled';
 
 export const GoBack = ({ to, children }) => {
   return (
-    <Link to={to}>
+    <BackLink to={to}>
       <AiOutlineArrowLeft />
       {children}
-    </Link>
+    </BackLink>
   );
 };
 
