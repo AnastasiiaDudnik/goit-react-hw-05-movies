@@ -1,6 +1,6 @@
 import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import { useState, useEffect, useRef, Suspense } from 'react';
+import { getMovie } from 'services/movieAPI';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -11,22 +11,9 @@ const MovieDetails = () => {
 
   useEffect(() => {
     // const abortController = new AbortController();
-    async function fetchMovies(id) {
-      try {
-        const URL = 'https://api.themoviedb.org/3/movie/';
-        const KEY = '7113ba9605fd4f5593de8c8922948eb6';
-
-        const response = await axios.get(`${URL}${id}?api_key=${KEY}`, {
-          //   signal: abortController.signal,
-        });
-
-        setMovie(response.data);
-      } catch (error) {
-        setError(error);
-      }
-    }
-
-    fetchMovies(movieId);
+    getMovie(movieId)
+      .then(({ data }) => setMovie(data))
+      .catch(error => setError(error));
 
     // return () => {
     //   abortController.abort();
@@ -36,7 +23,6 @@ const MovieDetails = () => {
   const { title, release_date, poster_path, overview, genres, vote_average } =
     movie;
 
-  //   const userScore = Number.parseInt((vote_average / vote_count) * 100);
   const userScore = Number.parseInt(vote_average * 10);
 
   return (
@@ -76,7 +62,9 @@ const MovieDetails = () => {
         </ul>
       </div>
 
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useSearchParams, Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { getMovieSearch } from 'services/movieAPI';
 // import toast from 'react-hot-toast';
-import axios from 'axios';
 
 const MovieSearch = () => {
   const [movie, setMovie] = useState('');
@@ -15,23 +15,10 @@ const MovieSearch = () => {
     if (!searchQuerry) {
       return;
     }
-    async function fetchMovies(query) {
-      try {
-        const URL = 'https://api.themoviedb.org/3/search/movie';
-        const KEY = '7113ba9605fd4f5593de8c8922948eb6';
 
-        const response = await axios.get(
-          `${URL}?api_key=${KEY}&language=en-US&query=${query}&page=1&include_adult=false`
-        );
-
-        setMovie(response.data.results);
-        console.log(response.data.results);
-      } catch (error) {
-        setError(error);
-      }
-    }
-
-    fetchMovies(searchQuerry);
+    getMovieSearch(searchQuerry)
+      .then(({ results }) => setMovie(results))
+      .catch(error => setError(error));
   }, [searchQuerry]);
 
   const updateQueryString = e => {
