@@ -2,6 +2,7 @@ import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { getMovie } from 'services/movieAPI';
 import { Loader } from 'components/Loader/Loader';
+import { GoBack } from 'components/GoBack/GoBack';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -29,7 +30,7 @@ const MovieDetails = () => {
   return (
     <>
       {error && <h1>{error.message}</h1>}
-      <Link to={goBackRef}>Go back</Link>
+      <GoBack to={goBackRef}>Go back</GoBack>
       {movie && (
         <div>
           <h1>

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getMovieList } from 'services/movieAPI';
-// import PropTypes from 'prop-types';
 
 const Home = () => {
   const [movieList, setMovieList] = useState([]);
