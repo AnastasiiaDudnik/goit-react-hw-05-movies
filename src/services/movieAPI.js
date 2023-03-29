@@ -19,7 +19,7 @@ export const getMovieSearch = async query => {
   } catch (error) {}
 };
 
-export const getMovie = async id => {
+export const getMovie = async (id, signal) => {
   try {
     return await axios.get(`/movie/${id}?api_key=${API_KEY}`);
   } catch (error) {}
