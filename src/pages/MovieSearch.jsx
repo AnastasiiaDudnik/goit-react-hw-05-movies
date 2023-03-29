@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useSearchParams, Link } from 'react-router-dom';
 import { getMovieSearch } from 'services/movieAPI';
 import { SearchBar } from 'components/Searchbar/SearchBar';
+import { ListOfMovies } from './Home.styled';
 
 const MovieSearch = () => {
   const [movie, setMovie] = useState('');
@@ -44,7 +45,7 @@ const MovieSearch = () => {
         onSubmit={handleSubmit}
       />
       {error && <h1>{error.message}</h1>}
-      <ul>
+      <ListOfMovies>
         {movie &&
           movie.map(({ title, id }) => (
             <li key={id}>
@@ -53,7 +54,7 @@ const MovieSearch = () => {
               </Link>
             </li>
           ))}
-      </ul>
+      </ListOfMovies>
     </>
   );
 };
