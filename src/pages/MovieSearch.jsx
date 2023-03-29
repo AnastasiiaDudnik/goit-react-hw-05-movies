@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useSearchParams, Link } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import { getMovieSearch } from 'services/movieAPI';
-// import toast from 'react-hot-toast';
+import { SearchBar } from 'components/Searchbar/SearchBar';
 
 const MovieSearch = () => {
   const [movie, setMovie] = useState('');
@@ -39,23 +38,11 @@ const MovieSearch = () => {
 
   return (
     <>
-      <Toaster />
-
-      <form onSubmit={handleSubmit}>
-        <input
-          className="input"
-          name="searchQuerry"
-          value={searchQuerry}
-          onChange={updateQueryString}
-          type="text"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search movies"
-        />
-        <button type="submit">
-          <span>Search</span>
-        </button>
-      </form>
+      <SearchBar
+        value={searchQuerry}
+        onChange={updateQueryString}
+        onSubmit={handleSubmit}
+      />
       {error && <h1>{error.message}</h1>}
       <ul>
         {movie &&
