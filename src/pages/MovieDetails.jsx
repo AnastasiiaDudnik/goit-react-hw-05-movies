@@ -13,14 +13,9 @@ const MovieDetails = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // const abortController = new AbortController();
     getMovie(movieId)
       .then(({ data }) => setMovie(data))
       .catch(error => setError(error));
-
-    // return () => {
-    //   abortController.abort();
-    // };
   }, [movieId]);
 
   const { title, release_date, poster_path, overview, genres, vote_average } =

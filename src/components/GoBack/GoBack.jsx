@@ -4,7 +4,7 @@ import { BackLink } from './GoBack.styled';
 
 export const GoBack = ({ to, children }) => {
   return (
-    <BackLink to={to}>
+    <BackLink to={to.current.pathname}>
       <AiOutlineArrowLeft />
       {children}
     </BackLink>
