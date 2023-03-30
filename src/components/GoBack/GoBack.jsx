@@ -3,8 +3,9 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BackLink } from './GoBack.styled';
 
 export const GoBack = ({ to, children }) => {
+  const link = to.current.pathname + to.current.search;
   return (
-    <BackLink to={to.current.pathname}>
+    <BackLink to={link}>
       <AiOutlineArrowLeft />
       {children}
     </BackLink>
